@@ -1,11 +1,10 @@
-import './globals.css';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import { ThemeProvider } from "next-themes";
+import Navbar from "@/components/navbar";
+import "./globals.css";
 
 export const metadata = {
-  title: 'ConvertDoc-Safely',
-  description: 'Convert files using FFmpeg.wasm',
+  title: "File Converter",
+  description: "Convert files using FFmpeg.wasm",
 };
 
 export default function RootLayout({
@@ -14,8 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="flex min-h-screen flex-col bg-background font-sans antialiased">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Navbar />
+          {/* Allow page to fill remaining space */}
+          <div className="flex-1">{children}</div>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
